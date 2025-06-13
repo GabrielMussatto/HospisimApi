@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using HospisimApi.Enums;
 using System.Collections.Generic;
+using System;
 
 namespace HospisimApi.Models
 {
@@ -10,8 +11,11 @@ namespace HospisimApi.Models
         [Key]
         public Guid Id { get; set; }
 
-        [Required(ErrorMessage = "A data e hora do atendimento são obrigatórias.")]
-        public DateTime DataHora { get; set; }
+        [Required(ErrorMessage = "A data do atendimento é obrigatória.")]
+        public DateTime Data { get; set; }
+
+        [Required(ErrorMessage = "A hora do atendimento é obrigatória.")]
+        public TimeSpan Hora { get; set; }
 
         [Required(ErrorMessage = "O tipo de atendimento é obrigatório.")]
         public TipoAtendimentoEnum Tipo { get; set; }
@@ -20,7 +24,7 @@ namespace HospisimApi.Models
         public StatusAtendimentoEnum Status { get; set; }
 
         [StringLength(100, ErrorMessage = "O local do atendimento não pode exceder 100 caracteres.")]
-        public string Local { get; set; } // Ex: Sala 01
+        public string Local { get; set; }
 
         [Required(ErrorMessage = "O ID do paciente é obrigatório.")]
         public Guid PacienteId { get; set; }
@@ -41,7 +45,7 @@ namespace HospisimApi.Models
         public ICollection<Prescricao>? Prescricoes { get; set; }
         public ICollection<Exame>? Exames { get; set; }
 
-        // Relacionamento 0..1:1 com Internacao (uma Internação pode ser iniciada por um Atendimento)
+        // Relacionamento 0..1:1 com Internacao
         public Internacao? Internacao { get; set; }
     }
 }

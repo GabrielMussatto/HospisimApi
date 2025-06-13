@@ -72,5 +72,6 @@ namespace HospisimApi.Models
         // Relacionamentos
         public ICollection<Prontuario>? Prontuarios { get; set; }
         public ICollection<Internacao>? Internacoes { get; set; }
+        public ICollection<Atendimento>? Atendimentos { get; set; }
     }
 }
