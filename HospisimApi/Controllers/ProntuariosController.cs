@@ -75,6 +75,12 @@ namespace HospisimApi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProntuario(Guid id, UpdateProntuarioDto prontuarioDto) // Alterado para receber o DTO de atualização
         {
+            // Valida se o ID na URL corresponde ao ID no DTO
+            if (id != prontuarioDto.Id)
+            {
+                return BadRequest("O ID na URL não corresponde ao ID do prontuário no corpo da requisição.");
+            }
+
             // Validação de modelo (Data Annotations do DTO)
             if (!ModelState.IsValid)
             {

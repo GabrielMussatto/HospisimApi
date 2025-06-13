@@ -9,6 +9,8 @@ namespace HospisimApi.Converters
     {
         private const string DateFormat = "dd/MM/yyyy";
 
+        // Define a cultura brasileira para parsing e formatação, garantindo que
+        // datas como "01/02/2024" sejam interpretadas como 1º de fevereiro e não 2 de janeiro.
         private static CultureInfo BrazilianCulture = new CultureInfo("pt-BR");
 
         public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)

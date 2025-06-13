@@ -4,6 +4,7 @@ using HospisimApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HospisimApi.Migrations
 {
     [DbContext(typeof(HospisimDbContext))]
-    partial class HospisimDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250612015139_AdicionandoFormatacaoTeleCpf")]
+    partial class AdicionandoFormatacaoTeleCpf
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -79,54 +82,6 @@ namespace HospisimApi.Migrations
                         .IsUnique();
 
                     b.ToTable("Pacientes");
-                });
-
-            modelBuilder.Entity("HospisimApi.Models.Prontuario", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("DataAbertura")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("NumeroProntuario")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("ObservacoesGerais")
-                        .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
-
-                    b.Property<Guid>("PacienteId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NumeroProntuario")
-                        .IsUnique();
-
-                    b.HasIndex("PacienteId");
-
-                    b.ToTable("Prontuarios");
-                });
-
-            modelBuilder.Entity("HospisimApi.Models.Prontuario", b =>
-                {
-                    b.HasOne("HospisimApi.Models.Paciente", "Paciente")
-                        .WithMany("Prontuarios")
-                        .HasForeignKey("PacienteId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Paciente");
-                });
-
-            modelBuilder.Entity("HospisimApi.Models.Paciente", b =>
-                {
-                    b.Navigation("Prontuarios");
                 });
 #pragma warning restore 612, 618
         }
