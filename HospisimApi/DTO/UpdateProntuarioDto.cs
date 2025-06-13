@@ -5,9 +5,6 @@ namespace HospisimApi.DTOs
 {
     public class UpdateProntuarioDto
     {
-        [Required]
-        public Guid Id { get; set; }
-
         [Required(ErrorMessage = "O número do prontuário é obrigatório.")]
         [StringLength(50, ErrorMessage = "O número do prontuário não pode exceder 50 caracteres.")]
         public string NumeroProntuario { get; set; }
